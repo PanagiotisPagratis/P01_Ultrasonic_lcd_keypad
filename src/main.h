@@ -45,8 +45,8 @@ double FULL_MAIN_TANK_LT = ((LARGE_TANK_LENGTH * LARGE_TANK_WIDTH *LARGE_TANK_HE
 double FULL_CCR_TANK_LT  = ((SMALL_TANK_LENGTH * SMALL_TANK_WIDTH * SMALL_TANK_HEIGHT));
 //LABELS FOR MENU SCREEN UNDER THIS LINE//////////////////////////////////////////
 /////////////////////****************/////////////////////////////////////////////
-#define LABEL1      "MAIN TANK (1/2)"
-#define LABEL2      "CCR  TANK (2/2)"
+#define LABEL1      "MAIN TANK"
+#define LABEL2      "CCR  TANK"
 /////////////////////VAL*************/////////////////////////////////////////////
 #define UNIT1_1           "kL REMAIN"
 #define UNIT1_2           "%  REMAIN"

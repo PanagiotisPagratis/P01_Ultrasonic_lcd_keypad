@@ -3,18 +3,18 @@
   AUTOR: PAGRATIS PANAGIOTIS
   DATE: 16/11/2023
 
-  test change for check if is visible in github
-
 ///////////////////////////////////////////////////////////////////////////////////////////  
  (free) = 1023   (1)select=639   (2)right=408    (3)down=255    (4)up=100    (5)left=0   */
  //////////////////////////////////////////////////////////////////////////////////////////
 #include <main.h>
 //MENU LISTS UNDER THIS LINE/////////////////////////////////////////////////////
-String firstLineLabel[MENU_SIZE] =                      {LABEL1, LABEL2};
-String secondLineLable[MENU_SIZE] [SUB_MENU_SIZE]  =    {{UNIT1_1, UNIT1_2, UNIT2_1, UNIT2_2, UNIT3}, 
-                                                        {UNIT1_1, UNIT1_2, UNIT2_1, UNIT2_2, UNIT3}};
-double values[MENU_SIZE][SUB_MENU_SIZE] =                  {{remainLTmainTank, remainPERCmainTank, lossLTmainTank, lossPERCmainTank, distanceMainTank},
-                                                           {remainLTccrTank, remainPERCccrTank, lossLTccrTank, lossPERCccrTank, distanceCcrTank}};
+String firstLineLabel[MENU_SIZE] =                      { LABEL1, LABEL2 };
+String showPosition[MENU_SIZE] [SUB_MENU_SIZE] =        { {"1.1", "1.2", "1.3", "1.4", "1.5"},
+                                                          {"2.1", "2.2", "2.3", "2.4", "2.5"} };
+String secondLineLable[MENU_SIZE] [SUB_MENU_SIZE]  =    { {UNIT1_1, UNIT1_2, UNIT2_1, UNIT2_2, UNIT3}, 
+                                                          {UNIT1_1, UNIT1_2, UNIT2_1, UNIT2_2, UNIT3} };
+double values[MENU_SIZE][SUB_MENU_SIZE] =               { {remainLTmainTank, remainPERCmainTank, lossLTmainTank, lossPERCmainTank, distanceMainTank},
+                                                          {remainLTccrTank, remainPERCccrTank, lossLTccrTank, lossPERCccrTank, distanceCcrTank} };
 //OBJECT CREATION UNDER THIS LINE/////////////////////////////////////////////////
 
 NewPing sonarCcrTank(TRG_S_PIN, ECH_S_PIN, MAX_DIST);
@@ -32,8 +32,6 @@ void loop() {
     btnState = btn_evaluation(analogRead(BTN_PIN));
     cur_delay_ms = millis();
     if( ((cur_delay_ms - old_delay_ms) > DELAY_USS_READ) || (btnState != oldBtnState) ) {
-        //distanceMainTank = 20;
-        //distanceCcrTank = 10;
         distanceMainTank =  sonarMainTank.ping_cm();
         distanceCcrTank =   sonarCcrTank.ping_cm();
         if(DEBUG_MODE) {
@@ -45,10 +43,16 @@ void loop() {
         convertions();
         changeScreen(btnState); 
         lcd.clear();  
+        //PRINT FIRST LINE PART ONE
         lcd.setCursor(0, 0);
         lcd.print(firstLineLabel[screenCurrentPosition]);
+        //PRINT FIRST LINE PART TWO
+        lcd.setCursor(12, 0);
+        lcd.print(showPosition[screenCurrentPosition][subMenuCurrentPosition]);
+        //PRINT SECOND LINE PART ONE
         lcd.setCursor(0, 1);
         lcd.print(values[screenCurrentPosition][subMenuCurrentPosition]);
+        //PRINT SECOND LINE PART TWO
         lcd.setCursor(6, 1);
         lcd.print(secondLineLable[screenCurrentPosition][subMenuCurrentPosition]);
         oldBtnState = btnState;
