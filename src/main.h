@@ -50,9 +50,9 @@ double FULL_CCR_TANK_LT  = ((SMALL_TANK_LENGTH * SMALL_TANK_WIDTH * SMALL_TANK_H
 /////////////////////VAL*************/////////////////////////////////////////////
 #define UNIT1_1           "kL REMAIN"
 #define UNIT1_2           "%  REMAIN"
-#define UNIT2_1           "kL LOSS" 
-#define UNIT2_2           "%  LOSS" 
-#define UNIT3             "CM SPACE" 
+#define UNIT2_1           "kL   LOSS" 
+#define UNIT2_2           "%    LOSS" 
+#define UNIT3             "CM  SPACE" 
 //DECLARATION VARIABLES UNDER THIS LINE///////////////////////////////////////////
 const int rs = 8, en = 9, d4 = 4, d5 = 5, d6 = 6, d7 = 7;
 int btn_resistan;

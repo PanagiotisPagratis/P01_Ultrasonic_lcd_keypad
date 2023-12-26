@@ -9,20 +9,24 @@
 #include <main.h>
 //MENU LISTS UNDER THIS LINE/////////////////////////////////////////////////////
 String firstLineLabel[MENU_SIZE] =                      { LABEL1, LABEL2 };
-String showPosition[MENU_SIZE] [SUB_MENU_SIZE] =        { {"1.1", "1.2", "1.3", "1.4", "1.5"},
-                                                          {"2.1", "2.2", "2.3", "2.4", "2.5"} };
+String showPosition[MENU_SIZE] [SUB_MENU_SIZE] =        { {"(1.1)", "(1.2)", "(1.3)", "(1.4)", "(1.5)"},
+                                                          {"(2.1)", "(2.2)", "(2.3)", "(2.4)", "(2.5)"} };
 String secondLineLable[MENU_SIZE] [SUB_MENU_SIZE]  =    { {UNIT1_1, UNIT1_2, UNIT2_1, UNIT2_2, UNIT3}, 
                                                           {UNIT1_1, UNIT1_2, UNIT2_1, UNIT2_2, UNIT3} };
-double values[MENU_SIZE][SUB_MENU_SIZE] =               { {remainLTmainTank, remainPERCmainTank, lossLTmainTank, lossPERCmainTank, distanceMainTank},
+double values[MENU_SIZE] [SUB_MENU_SIZE] =              { {remainLTmainTank, remainPERCmainTank, lossLTmainTank, lossPERCmainTank, distanceMainTank},
                                                           {remainLTccrTank, remainPERCccrTank, lossLTccrTank, lossPERCccrTank, distanceCcrTank} };
 //OBJECT CREATION UNDER THIS LINE/////////////////////////////////////////////////
-
 NewPing sonarCcrTank(TRG_S_PIN, ECH_S_PIN, MAX_DIST);
 NewPing sonarMainTank(TRG_M_PIN, ECH_M_PIN, MAX_DIST);
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 //SETUP FUNCTION UNDER THIS LINE//////////////////////////////////////////////////
 void setup() {
     lcd.begin(16, 2);
+    // lcd.setCursor(2, 0);
+    // lcd.print("PROJECT BY");
+    // lcd.setCursor(0, 1);
+    // lcd.print("PAGRATIS PANOS.");
+    // delay(5000);
     lcd.clear();
     lcd.setCursor(0, 0);
     if(DEBUG_MODE) Serial.begin(9600);
@@ -47,13 +51,13 @@ void loop() {
         lcd.setCursor(0, 0);
         lcd.print(firstLineLabel[screenCurrentPosition]);
         //PRINT FIRST LINE PART TWO
-        lcd.setCursor(12, 0);
+        lcd.setCursor(11, 0);
         lcd.print(showPosition[screenCurrentPosition][subMenuCurrentPosition]);
         //PRINT SECOND LINE PART ONE
         lcd.setCursor(0, 1);
         lcd.print(values[screenCurrentPosition][subMenuCurrentPosition]);
         //PRINT SECOND LINE PART TWO
-        lcd.setCursor(6, 1);
+        lcd.setCursor(7, 1);
         lcd.print(secondLineLable[screenCurrentPosition][subMenuCurrentPosition]);
         oldBtnState = btnState;
         old_delay_ms = cur_delay_ms;
@@ -62,10 +66,10 @@ void loop() {
 }//end loop
 //FUNCTIONS UNDER THIS LINE////////////////////////////////////////////////////////
 int btn_evaluation(int val) {
-    if(val < 670 && val > 600)       return 1;
-    else if( val < 450 && val > 350) return 2;
-    else if(val < 300 && val > 200)  return 3;
-    else if(val < 150 && val > 50)   return 4;
+    if(val < 670 && val > 610)       return 1;
+    else if( val < 440 && val > 380) return 2;
+    else if(val < 285 && val > 220)  return 3;
+    else if(val < 120 && val > 80)   return 4;
     else if(val < 49)                return 5;
     return 0;
 }//end btn_evaluation
